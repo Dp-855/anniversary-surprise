@@ -58,8 +58,9 @@
     <!-- Configuration -->
     <script>
         // *** 🛠️ CUSTOMIZATION: SET YOUR ANNIVERSARY DATE HERE 🛠️ ***
-        // Format: Month Day, Year Hour:Minute:Second (24hr time)
-        const ANNIVERSARY_DATE = "October 5, 2025 00:58:00"; 
+        // Format: YYYY-MM-DDTHH:MM:SS (Using ISO format for better compatibility)
+        // This will be interpreted based on the viewer's local time zone.
+        const ANNIVERSARY_DATE = "2025-10-04T16:30:00"; 
         const TARGET_DATE = new Date(ANNIVERSARY_DATE).getTime();
     </script>
 
@@ -105,31 +106,35 @@
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 
-                <!-- Photo Card 1 -->
+                <!-- Photo Card 1 - Corrected URL -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <img src="https://drive.google.com/file/d/1G9ZbiOkAu8Dnl1BvxTfWh1hhOakUjBwM/view?usp=drive_link" 
-                         alt="Memory 1" class="w-full h-40 md:h-64 object-cover">
+                    <img src="https://drive.google.com/uc?export=download&id=1G9ZbiOkAu8Dnl1BvxTfWh1hhOakUjBwM" 
+                         alt="Memory 1 - The Beginning" class="w-full h-40 md:h-64 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/fee2e2/9d174d?text=Check+Drive+Permissions';">
                     <p class="p-3 text-sm font-medium text-center text-pink-700">The Beginning</p>
                 </div>
 
-                <!-- Photo Card 2 -->
+                <!-- Photo Card 2 - Corrected URL -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <img src="https://drive.google.com/file/d/1G9ZbiOkAu8Dnl1BvxTfWh1hhOakUjBwM/view?usp=drive_link" 
-                         alt="Memory 2" class="w-full h-40 md:h-64 object-cover">
+                    <img src="https://drive.google.com/uc?export=download&id=1sFAkZ12-YXLkVbHVJ1F94UD9DirEnQGU" 
+                         alt="Memory 2 - Adventure Time" class="w-full h-40 md:h-64 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/fee2e2/9d174d?text=Check+Drive+Permissions';">
                     <p class="p-3 text-sm font-medium text-center text-red-700">Adventure Time</p>
                 </div>
 
-                <!-- Photo Card 3 -->
+                <!-- Photo Card 3 - Corrected URL -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <img src="https://drive.google.com/file/d/1G9ZbiOkAu8Dnl1BvxTfWh1hhOakUjBwM/view?usp=drive_link" 
-                         alt="Memory 3" class="w-full h-40 md:h-64 object-cover">
+                    <img src="https://drive.google.com/uc?export=download&id=172uTnnLbEy9DUT_kmiHPBiV6LxDnywbv" 
+                         alt="Memory 3 - My Favorite Smile" class="w-full h-40 md:h-64 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/fee2e2/9d174d?text=Check+Drive+Permissions';">
                     <p class="p-3 text-sm font-medium text-center text-pink-700">My Favorite Smile</p>
                 </div>
 
-                <!-- Photo Card 4 -->
+                <!-- Photo Card 4 - Corrected URL -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <img src="https://drive.google.com/file/d/1G9ZbiOkAu8Dnl1BvxTfWh1hhOakUjBwM/view?usp=drive_link" 
-                         alt="Memory 4" class="w-full h-40 md:h-64 object-cover">
+                    <img src="https://drive.google.com/uc?export=download&id=1t6HRSmXpqL5HXe-v-pXl3Xh0ne25Ja3r" 
+                         alt="Memory 4 - To Many More Years" class="w-full h-40 md:h-64 object-cover"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/fee2e2/9d174d?text=Check+Drive+Permissions';">
                     <p class="p-3 text-sm font-medium text-center text-red-700">To Many More Years</p>
                 </div>
             </div>
@@ -141,7 +146,7 @@
                 With all my love,
             </p>
             <p class="text-2xl hero-text font-semibold text-pink-600 mt-2">
-                Lilli
+                [Your Name Here]
             </p>
         </div>
 
@@ -276,15 +281,7 @@
                  revealContent();
             }
         });
-
+    
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
