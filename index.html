@@ -87,7 +87,7 @@
 
 
     <!-- 3. Main Anniversary Content (Hidden until revealed) -->
-    <div id="main-content" class="w-full max-w-5xl py-12 md:py-16 px-4 md:px-8 bg-white rounded-xl shadow-2xl transition-all duration-1000 transform scale-95 md:scale-100 mt-8" style="opacity: 0;">
+    <div id="main-content" class="w-full max-w-5xl py-12 md:py-16 px-4 md:px-8 bg-white rounded-xl shadow-2xl transition-all duration-1000 transform scale-95" style="opacity: 0;">
 
         <!-- Heartfelt Message Section -->
         <section class="text-center mb-12">
@@ -106,34 +106,38 @@
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 
-                <!-- Photo Card 1 - ⚠️ PASTE YOUR BASE64 STRING HERE ⚠️ -->
+                <!-- Photo Card 1 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- Replace the placeholder data string with your actual Base64 image data (starts with data:image/...) -->
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" 
+                    <!-- Replace the placeholder URL below with the direct URL to your image -->
+                    <img src="https://placehold.co/400x600/fecaca/dc2626?text=Our+Beginning" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
                          alt="Memory 1 - The Beginning" class="w-full h-40 md:h-64 object-cover">
                     <p class="p-3 text-sm font-medium text-center text-pink-700">The Beginning</p>
                 </div>
 
-                <!-- Photo Card 2 - ⚠️ PASTE YOUR BASE64 STRING HERE ⚠️ -->
+                <!-- Photo Card 2 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- Replace the placeholder data string with your actual Base64 image data (starts with data:image/...) -->
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" 
+                    <!-- Replace the placeholder URL below with the direct URL to your image -->
+                    <img src="https://placehold.co/400x600/f87171/white?text=Sweet+Adventures" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
                          alt="Memory 2 - Adventure Time" class="w-full h-40 md:h-64 object-cover">
                     <p class="p-3 text-sm font-medium text-center text-red-700">Adventure Time</p>
                 </div>
 
-                <!-- Photo Card 3 - ⚠️ PASTE YOUR BASE64 STRING HERE ⚠️ -->
+                <!-- Photo Card 3 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- Replace the placeholder data string with your actual Base64 image data (starts with data:image/...) -->
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" 
+                    <!-- Replace the placeholder URL below with the direct URL to your image -->
+                    <img src="https://placehold.co/400x600/fb923c/white?text=Favorite+Smile" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
                          alt="Memory 3 - My Favorite Smile" class="w-full h-40 md:h-64 object-cover">
                     <p class="p-3 text-sm font-medium text-center text-pink-700">My Favorite Smile</p>
                 </div>
 
-                <!-- Photo Card 4 - ⚠️ PASTE YOUR BASE64 STRING HERE ⚠️ -->
+                <!-- Photo Card 4 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
                 <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- Replace the placeholder data string with your actual Base64 image data (starts with data:image/...) -->
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" 
+                    <!-- Replace the placeholder URL below with the direct URL to your image -->
+                    <img src="https://placehold.co/400x600/f472b6/white?text=To+Forever" 
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
                          alt="Memory 4 - To Many More Years" class="w-full h-40 md:h-64 object-cover">
                     <p class="p-3 text-sm font-medium text-center text-red-700">To Many More Years</p>
                 </div>
@@ -171,7 +175,7 @@
         function createSegment(value, unit) {
             return `
                 <div class="countdown-segment flex flex-col items-center justify-center p-3 md:p-6 bg-white text-red-500 rounded-lg shadow-xl border-t-4 border-red-400 w-20 md:w-28 transition-all duration-500">
-                    <span class="text-3xl md:text-5xl font-extrabold">${value}</span>
+                    <span class="text-3xl md:text-5xl font-extrabold">${value.toString().padStart(2, '0')}</span>
                     <span class="text-xs md:text-sm uppercase font-semibold text-gray-500 mt-1">${unit}</span>
                 </div>
             `;
@@ -230,7 +234,7 @@
             setTimeout(() => {
                 coverScreen.classList.add('hidden');
                 mainContent.style.opacity = '1';
-                mainContent.classList.add('scale-100');
+                mainContent.style.transform = 'scale(1)';
                 
                 // Launch the confetti effect
                 launchConfetti();
@@ -245,7 +249,7 @@
         function launchConfetti() {
             const duration = 5 * 1000;
             const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999, scalar: 0.9 };
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999, scalar: 0.9, colors: ['#f472b6', '#ec4899', '#fce7f3', '#ffffff', '#e11d48'] };
 
             function randomInRange(min, max) {
                 return Math.random() * (max - min) + min;
