@@ -1,343 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Special Anniversary Countdown</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.js"></script>
-    <style>
-        /* Custom styles for a romantic theme */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fce7f3; /* Light Pink Background */
-            overflow-x: hidden;
-            transition: background-color 0.5s;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Special Anniversary Countdown</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.js"></script>
 
-        .countdown-segment {
-            transition: all 0.3s ease-in-out;
-            transform: scale(1);
-        }
-        
-        .countdown-segment:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(224, 36, 91, 0.5), 0 4px 6px -2px rgba(224, 36, 91, 0.05);
-        }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-        /* Hide content until revealed */
-        #main-content {
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fce7f3;
+      overflow-x: hidden;
+      transition: background-color 0.5s;
+    }
 
-        /* Hero text effect */
-        .hero-text {
-            font-family: 'Playfair Display', serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
+    .countdown-segment {
+      transition: all 0.3s ease-in-out;
+      transform: scale(1);
+    }
 
-        /* Pulsing animation for the reveal button */
-        @keyframes pulse-reveal {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 36, 91, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(224, 36, 91, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 36, 91, 0); }
-        }
+    .countdown-segment:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px rgba(224, 36, 91, 0.5), 0 4px 6px -2px rgba(224, 36, 91, 0.05);
+    }
 
-        #reveal-button {
-            animation: pulse-reveal 2s infinite;
-        }
-        
-        /* Styles for the new tabbed photo section */
-        .tab-content {
-            transition: opacity 0.5s ease-in-out;
-        }
+    #main-content {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
 
-        .image-tab {
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-        }
+    .hero-text {
+      font-family: 'Playfair Display', serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
 
-        .active-tab {
-            transform: scale(1.15);
-            border-color: #ec4899; /* A brighter pink */
-            box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
-        }
-    </style>
+    @keyframes pulse-reveal {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 36, 91, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(224, 36, 91, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 36, 91, 0); }
+    }
+
+    #reveal-button {
+      animation: pulse-reveal 2s infinite;
+    }
+
+    .image-tab {
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+    }
+
+    .active-tab {
+      transform: scale(1.15);
+      border-color: #ec4899;
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.3s ease-out;
+    }
+  </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-    <!-- Configuration -->
-    <script>
-        // *** 🛠️ CUSTOMIZATION: SET YOUR ANNIVERSARY DATE HERE 🛠️ ***
-        // Format: YYYY-MM-DDTHH:MM:SS (Using ISO format for better compatibility)
-        // This will be interpreted based on the viewer's local time zone.
-        const ANNIVERSARY_DATE = "10-11-2025 17:14:00"; 
-        const TARGET_DATE = new Date(ANNIVERSARY_DATE).getTime();
-    </script>
+  <script>
+    const ANNIVERSARY_DATE = "10-11-2025 17:24:00";
+    const TARGET_DATE = new Date(ANNIVERSARY_DATE).getTime();
+  </script>
 
-    <!-- 1. Countdown Container (Initial State) -->
-    <div id="countdown-container" class="w-full max-w-4xl text-center transition-opacity duration-1000">
-        <h1 class="text-4xl md:text-6xl font-extrabold hero-text text-pink-600 mb-8">
-            Counting Down to Our Day...
-        </h1>
-        <div id="countdown-display" class="flex justify-center space-x-3 md:space-x-6">
-            <!-- Countdown segments will be injected here by JavaScript -->
+  <!-- Countdown Container -->
+  <div id="countdown-container" class="w-full max-w-4xl text-center transition-opacity duration-1000">
+    <h1 class="text-4xl md:text-6xl font-extrabold hero-text text-pink-600 mb-8">
+      Counting Down to Our Day...
+    </h1>
+    <div id="countdown-display" class="flex justify-center space-x-3 md:space-x-6"></div>
+  </div>
+
+  <!-- Reveal Cover Screen -->
+  <div id="cover-screen" class="hidden fixed inset-0 bg-gradient-to-br from-pink-500 to-red-400 flex flex-col items-center justify-center p-8 z-50">
+    <h2 class="text-4xl md:text-7xl text-white font-extrabold hero-text mb-12 animate-bounce">
+      It's Our Day! 💖
+    </h2>
+    <button id="reveal-button" class="bg-white text-pink-700 font-bold py-4 px-10 rounded-full shadow-2xl text-xl hover:bg-pink-50 transition duration-300">
+      Tap to Reveal Your Surprise
+    </button>
+    <p class="mt-8 text-white/70 text-sm">Click anywhere if you miss the button!</p>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" class="w-full max-w-5xl py-12 md:py-16 px-4 md:px-8 bg-white rounded-xl shadow-2xl transition-all duration-1000 transform scale-95">
+
+    <!-- Message -->
+    <section class="text-center mb-12">
+      <h2 class="text-3xl md:text-5xl hero-text font-bold text-red-500 mb-4">
+        Happy Anniversary, My Love!
+      </h2>
+      <p class="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+        One year down, forever to go. This journey with you has been the most beautiful adventure. Every moment is a treasure.
+      </p>
+    </section>
+
+    <!-- Photo Tabs -->
+    <section class="space-y-8">
+      <h3 class="text-2xl font-semibold text-center text-pink-600 border-b pb-4">
+        Our Journey in Photos 📸
+      </h3>
+
+      <div class="flex justify-center items-center gap-2 md:gap-4 p-2 bg-pink-50 rounded-full shadow-inner">
+        <div class="image-tab cursor-pointer rounded-full p-1 active-tab" data-img="an.jpg" data-title="The Beginning" data-text="This was the day our adventure started. I remember feeling so excited and a little nervous, but seeing your smile made everything perfect.">
+          <img src="an.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fecaca/dc2626?text=1';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
         </div>
-    </div>
-
-    <!-- 2. "Tap to Reveal" Cover Screen (Hidden until countdown ends) -->
-    <div id="cover-screen" class="hidden fixed inset-0 bg-gradient-to-br from-pink-500 to-red-400 flex flex-col items-center justify-center p-8 z-50">
-        <h2 class="text-4xl md:text-7xl text-white font-extrabold hero-text mb-12 animate-bounce">
-            It's Our Day! 💖
-        </h2>
-        <button id="reveal-button" class="bg-white text-pink-700 font-bold py-4 px-10 rounded-full shadow-2xl text-xl hover:bg-pink-50 transition duration-300">
-            Tap to Reveal Your Surprise
-        </button>
-        <p class="mt-8 text-white/70 text-sm">Click anywhere on the screen if the button is missed!</p>
-    </div>
-
-
-    <!-- 3. Main Anniversary Content (Hidden until revealed) -->
-    <div id="main-content" class="w-full max-w-5xl py-12 md:py-16 px-4 md:px-8 bg-white rounded-xl shadow-2xl transition-all duration-1000 transform scale-95" style="opacity: 0;">
-
-        <!-- Heartfelt Message Section -->
-        <section class="text-center mb-12">
-            <h2 class="text-3xl md:text-5xl hero-text font-bold text-red-500 mb-4">
-                Happy Anniversary, My Love!
-            </h2>
-            <p class="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
-                One year down, forever to go. This journey with you has been the most beautiful adventure. Every moment is a treasure. Thank you for everything.
-            </p>
-        </section>
-
-        <!-- Photo Tab Section -->
-        <section class="space-y-8">
-            <h3 class="text-2xl font-semibold text-center text-pink-600 border-b pb-4">
-                Our Journey in Photos 📸
-            </h3>
-
-            <!-- Image Tabs -->
-            <div class="flex justify-center items-center gap-2 md:gap-4 p-2 bg-pink-50 rounded-full shadow-inner">
-                <!-- Tab 1 -->
-                <div class="image-tab active-tab cursor-pointer rounded-full p-1" data-tab="1">
-                    <img src="an.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fecaca/dc2626?text=1';" alt="Memory 1" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
-                </div>
-
-                <!-- Tab 2 -->
-                <div class="image-tab cursor-pointer rounded-full p-1" data-tab="2">
-                    <img src="annnn.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f87171/dc2626?text=2';" alt="Memory 2" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
-                </div>
-
-                <!-- Tab 3 -->
-                <div class="image-tab cursor-pointer rounded-full p-1" data-tab="3">
-                    <img src="images.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fb923c/dc2626?text=3';" alt="Memory 3" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
-                </div>
-
-                <!-- Tab 4 -->
-                <div class="image-tab cursor-pointer rounded-full p-1" data-tab="4">
-                    <img src="imgae.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f472b6/dc2626?text=4';" alt="Memory 4" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
-                </div>
-            </div>
-
-            <!-- Tab Content -->
-            <div class="mt-6 p-6 bg-gray-50/80 rounded-xl shadow-inner min-h-[150px] flex items-center justify-center text-center">
-                <!-- Content for Tab 1 -->
-                <div id="tab-content-1" class="tab-content">
-                    <h4 class="text-xl font-bold text-pink-700 mb-2 hero-text">The Beginning</h4>
-                    <p class="text-gray-600">This was the day our adventure started. I remember feeling so excited and a little nervous, but seeing your smile made everything perfect. It feels like yesterday, and yet it was the start of our forever.</p>
-                </div>
-
-                <!-- Content for Tab 2 (hidden by default) -->
-                <div id="tab-content-2" class="tab-content hidden">
-                    <h4 class="text-xl font-bold text-red-700 mb-2 hero-text">Adventure Time</h4>
-                    <p class="text-gray-600">Remember that spontaneous trip we took? We got a little lost, but we laughed the entire time. It's one of my favorite memories because it shows how we can make any situation fun together.</p>
-                </div>
-                
-                <!-- Content for Tab 3 (hidden by default) -->
-                <div id="tab-content-3" class="tab-content hidden">
-                    <h4 class="text-xl font-bold text-pink-700 mb-2 hero-text">My Favorite Smile</h4>
-                    <p class="text-gray-600">This picture says it all. Your smile lights up my world, and I feel so lucky that I get to be the reason behind it sometimes. Seeing you happy is the best feeling in the world.</p>
-                </div>
-
-                <!-- Content for Tab 4 (hidden by default) -->
-                <div id="tab-content-4" class="tab-content hidden">
-                    <h4 class="text-xl font-bold text-red-700 mb-2 hero-text">To Many More Years</h4>
-                    <p class="text-gray-600">From our first day to today, it's been an incredible journey. I can't wait to see what the future holds for us. Here's to a lifetime of more memories, more laughs, and more love. Happy Anniversary!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Signature -->
-        <div class="text-center mt-12 pt-6 border-t border-gray-100">
-            <p class="text-xl italic text-gray-400">
-                With all my love,
-            </p>
-            <p class="text-2xl hero-text font-semibold text-pink-600 mt-2">
-                [Your Name Here]
-            </p>
+        <div class="image-tab cursor-pointer rounded-full p-1" data-img="annnn.jpg" data-title="Adventure Time" data-text="Remember that spontaneous trip we took? We got a little lost, but we laughed the entire time. It's one of my favorite memories.">
+          <img src="annnn.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f87171/dc2626?text=2';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
         </div>
+        <div class="image-tab cursor-pointer rounded-full p-1" data-img="images.jpg" data-title="My Favorite Smile" data-text="Your smile lights up my world. Seeing you happy is the best feeling ever.">
+          <img src="images.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fb923c/dc2626?text=3';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+        </div>
+        <div class="image-tab cursor-pointer rounded-full p-1" data-img="imgae.jpeg" data-title="To Many More Years" data-text="From our first day to today, it's been an incredible journey. Here's to many more memories and laughs.">
+          <img src="imgae.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f472b6/dc2626?text=4';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+        </div>
+      </div>
+    </section>
 
+    <!-- Signature -->
+    <div class="text-center mt-12 pt-6 border-t border-gray-100">
+      <p class="text-xl italic text-gray-400">With all my love,</p>
+      <p class="text-2xl hero-text font-semibold text-pink-600 mt-2">[Your Name Here]</p>
     </div>
+  </div>
 
-    <!-- JavaScript Logic -->
-    <script>
-        const countdownDisplay = document.getElementById('countdown-display');
-        const countdownContainer = document.getElementById('countdown-container');
-        const coverScreen = document.getElementById('cover-screen');
-        const revealButton = document.getElementById('reveal-button');
-        const mainContent = document.getElementById('main-content');
-        
-        let countdownInterval;
+  <!-- Popup Overlay -->
+  <div id="popup-overlay" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-6 md:p-8 max-w-lg w-[90%] text-center relative shadow-2xl animate-fade-in">
+      <button id="close-popup" class="absolute top-3 right-3 text-gray-500 hover:text-pink-600 text-2xl font-bold">&times;</button>
+      <img id="popup-img" src="" alt="Memory" class="w-full h-64 object-cover rounded-xl mb-4 shadow-md">
+      <h4 id="popup-title" class="text-xl font-bold text-pink-700 mb-2 hero-text"></h4>
+      <p id="popup-text" class="text-gray-600"></p>
+    </div>
+  </div>
 
-        /**
-         * Converts time unit and label into an attractive HTML segment.
-         * @param {number} value - The time number (e.g., 5 for days).
-         * @param {string} unit - The time unit label (e.g., 'Days').
-         * @returns {string} HTML string for the segment.
-         */
-        function createSegment(value, unit) {
-            return `
-                <div class="countdown-segment flex flex-col items-center justify-center p-3 md:p-6 bg-white text-red-500 rounded-lg shadow-xl border-t-4 border-red-400 w-20 md:w-28 transition-all duration-500">
-                    <span class="text-3xl md:text-5xl font-extrabold">${value.toString().padStart(2, '0')}</span>
-                    <span class="text-xs md:text-sm uppercase font-semibold text-gray-500 mt-1">${unit}</span>
-                </div>
-            `;
-        }
+  <script>
+    const countdownDisplay = document.getElementById('countdown-display');
+    const countdownContainer = document.getElementById('countdown-container');
+    const coverScreen = document.getElementById('cover-screen');
+    const revealButton = document.getElementById('reveal-button');
+    const mainContent = document.getElementById('main-content');
+    let countdownInterval;
 
-        /**
-         * Calculates the remaining time and updates the countdown display.
-         */
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = TARGET_DATE - now;
+    function createSegment(value, unit) {
+      return `
+        <div class="countdown-segment flex flex-col items-center justify-center p-3 md:p-6 bg-white text-red-500 rounded-lg shadow-xl border-t-4 border-red-400 w-20 md:w-28">
+          <span class="text-3xl md:text-5xl font-extrabold">${value.toString().padStart(2, '0')}</span>
+          <span class="text-xs md:text-sm uppercase font-semibold text-gray-500 mt-1">${unit}</span>
+        </div>
+      `;
+    }
 
-            if (distance < 0) {
-                // Countdown finished!
-                clearInterval(countdownInterval);
-                displayRevealScreen();
-                return;
-            }
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = TARGET_DATE - now;
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        displayRevealScreen();
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownDisplay.innerHTML =
+        createSegment(days, "Days") +
+        createSegment(hours, "Hours") +
+        createSegment(minutes, "Minutes") +
+        createSegment(seconds, "Seconds");
+    }
 
-            // Time calculations for days, hours, minutes and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    function displayRevealScreen() {
+      countdownContainer.style.opacity = '0';
+      countdownContainer.style.height = '0';
+      setTimeout(() => {
+        countdownContainer.classList.add('hidden');
+        coverScreen.classList.remove('hidden');
+      }, 1000);
+    }
 
-            // Generate HTML
-            countdownDisplay.innerHTML = 
-                createSegment(days, "Days") +
-                createSegment(hours, "Hours") +
-                createSegment(minutes, "Minutes") +
-                createSegment(seconds, "Seconds");
-        }
+    function revealContent() {
+      coverScreen.style.opacity = '0';
+      setTimeout(() => {
+        coverScreen.classList.add('hidden');
+        mainContent.style.opacity = '1';
+        mainContent.style.transform = 'scale(1)';
+        launchConfetti();
+      }, 500);
+    }
 
-        /**
-         * Displays the cover screen and hides the countdown.
-         */
-        function displayRevealScreen() {
-            console.log("Countdown reached zero. Displaying reveal screen.");
-            countdownContainer.style.opacity = '0';
-            countdownContainer.style.height = '0';
-            setTimeout(() => {
-                countdownContainer.classList.add('hidden');
-                coverScreen.classList.remove('hidden');
-            }, 1000);
-        }
+    function launchConfetti() {
+      const duration = 5 * 1000;
+      const end = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999, scalar: 0.9, colors: ['#f472b6', '#ec4899', '#fce7f3', '#ffffff', '#e11d48'] };
+      const randomInRange = (min, max) => Math.random() * (max - min) + min;
+      const interval = setInterval(() => {
+        const timeLeft = end - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
+        const count = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount: count, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount: count, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+      }, 250);
+    }
 
-        /**
-         * Reveals the main content and launches confetti.
-         */
-        function revealContent() {
-            console.log("Content revealed!");
-            // Hide the cover screen
-            coverScreen.style.opacity = '0';
-            
-            // Show main content with a delay
-            setTimeout(() => {
-                coverScreen.classList.add('hidden');
-                mainContent.style.opacity = '1';
-                mainContent.style.transform = 'scale(1)';
-                
-                // Launch the confetti effect
-                launchConfetti();
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+    revealButton.addEventListener('click', revealContent);
+    coverScreen.addEventListener('click', (e) => { if (e.target !== revealButton) revealContent(); });
 
-                // Optional: Start background music here if you add an audio element
-            }, 500);
-        }
-        
-        /**
-         * Launches a beautiful, sustained confetti burst.
-         */
-        function launchConfetti() {
-            const duration = 5 * 1000;
-            const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999, scalar: 0.9, colors: ['#f472b6', '#ec4899', '#fce7f3', '#ffffff', '#e11d48'] };
+    // Popup Logic
+    const imageTabs = document.querySelectorAll('.image-tab');
+    const popupOverlay = document.getElementById('popup-overlay');
+    const popupImg = document.getElementById('popup-img');
+    const popupTitle = document.getElementById('popup-title');
+    const popupText = document.getElementById('popup-text');
+    const closePopup = document.getElementById('close-popup');
 
-            function randomInRange(min, max) {
-                return Math.random() * (max - min) + min;
-            }
+    imageTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const imgSrc = tab.getAttribute('data-img');
+        const title = tab.getAttribute('data-title');
+        const text = tab.getAttribute('data-text');
+        popupImg.src = imgSrc;
+        popupTitle.textContent = title;
+        popupText.textContent = text;
+        popupOverlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        launchConfetti(); // 🎉 Confetti when popup opens
+      });
+    });
 
-            const interval = setInterval(function() {
-                const timeLeft = animationEnd - Date.now();
+    closePopup.addEventListener('click', () => {
+      popupOverlay.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
 
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
-                const particleCount = 50 * (timeLeft / duration);
-                // since particles fall down, we can limit the animation to the top half of the screen
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-            }, 250);
-        }
-
-        // --- Event Listeners ---
-        
-        // 1. Initial Call and Interval Setup
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-
-        // 2. Reveal Logic on Button Click
-        revealButton.addEventListener('click', revealContent);
-
-        // 3. Reveal Logic on Cover Screen Tap/Click (for better touch target)
-        coverScreen.addEventListener('click', (event) => {
-            // Only trigger if the click isn't directly on the button (to avoid double trigger)
-            if (event.target !== revealButton) {
-                 revealContent();
-            }
-        });
-
-        // --- Tab Logic ---
-        const imageTabs = document.querySelectorAll('.image-tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        imageTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabNumber = tab.dataset.tab;
-
-                // Deactivate all tabs and hide all content
-                imageTabs.forEach(t => t.classList.remove('active-tab'));
-                tabContents.forEach(c => c.classList.add('hidden'));
-
-                // Activate the clicked tab
-                tab.classList.add('active-tab');
-                
-                // Show the corresponding content
-                const contentToShow = document.getElementById(`tab-content-${tabNumber}`);
-                if (contentToShow) {
-                    contentToShow.classList.remove('hidden');
-                }
-            });
-        });
-    
-    </script>
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        popupOverlay.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  </script>
 </body>
 </html>
-
