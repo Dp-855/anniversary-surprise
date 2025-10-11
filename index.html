@@ -51,6 +51,22 @@
         #reveal-button {
             animation: pulse-reveal 2s infinite;
         }
+        
+        /* Styles for the new tabbed photo section */
+        .tab-content {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .image-tab {
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .active-tab {
+            transform: scale(1.15);
+            border-color: #ec4899; /* A brighter pink */
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.5);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -60,7 +76,7 @@
         // *** 🛠️ CUSTOMIZATION: SET YOUR ANNIVERSARY DATE HERE 🛠️ ***
         // Format: YYYY-MM-DDTHH:MM:SS (Using ISO format for better compatibility)
         // This will be interpreted based on the viewer's local time zone.
-        const ANNIVERSARY_DATE = "10-11-2025 17:04:00"; 
+        const ANNIVERSARY_DATE = "10-11-2025 17:14:00"; 
         const TARGET_DATE = new Date(ANNIVERSARY_DATE).getTime();
     </script>
 
@@ -99,47 +115,59 @@
             </p>
         </section>
 
-        <!-- Photo Grid Section -->
-        <section class="space-y-12">
-            <h3 class="text-2xl font-semibold text-center text-pink-600 border-b pb-4 mb-8">
-                A Few Captured Memories 📸
+        <!-- Photo Tab Section -->
+        <section class="space-y-8">
+            <h3 class="text-2xl font-semibold text-center text-pink-600 border-b pb-4">
+                Our Journey in Photos 📸
             </h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+            <!-- Image Tabs -->
+            <div class="flex justify-center items-center gap-2 md:gap-4 p-2 bg-pink-50 rounded-full shadow-inner">
+                <!-- Tab 1 -->
+                <div class="image-tab active-tab cursor-pointer rounded-full p-1" data-tab="1">
+                    <img src="an.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fecaca/dc2626?text=1';" alt="Memory 1" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+                </div>
+
+                <!-- Tab 2 -->
+                <div class="image-tab cursor-pointer rounded-full p-1" data-tab="2">
+                    <img src="annnn.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f87171/dc2626?text=2';" alt="Memory 2" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+                </div>
+
+                <!-- Tab 3 -->
+                <div class="image-tab cursor-pointer rounded-full p-1" data-tab="3">
+                    <img src="images.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fb923c/dc2626?text=3';" alt="Memory 3" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+                </div>
+
+                <!-- Tab 4 -->
+                <div class="image-tab cursor-pointer rounded-full p-1" data-tab="4">
+                    <img src="imgae.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f472b6/dc2626?text=4';" alt="Memory 4" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="mt-6 p-6 bg-gray-50/80 rounded-xl shadow-inner min-h-[150px] flex items-center justify-center text-center">
+                <!-- Content for Tab 1 -->
+                <div id="tab-content-1" class="tab-content">
+                    <h4 class="text-xl font-bold text-pink-700 mb-2 hero-text">The Beginning</h4>
+                    <p class="text-gray-600">This was the day our adventure started. I remember feeling so excited and a little nervous, but seeing your smile made everything perfect. It feels like yesterday, and yet it was the start of our forever.</p>
+                </div>
+
+                <!-- Content for Tab 2 (hidden by default) -->
+                <div id="tab-content-2" class="tab-content hidden">
+                    <h4 class="text-xl font-bold text-red-700 mb-2 hero-text">Adventure Time</h4>
+                    <p class="text-gray-600">Remember that spontaneous trip we took? We got a little lost, but we laughed the entire time. It's one of my favorite memories because it shows how we can make any situation fun together.</p>
+                </div>
                 
-                <!-- Photo Card 1 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
-                <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- This is the corrected link format for your GitHub image -->
-                    <img src="an.jpg" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
-                         alt="Memory 1 - The Beginning" class="w-full h-40 md:h-64 object-cover">
-                    <p class="p-3 text-sm font-medium text-center text-pink-700">The Beginning</p>
+                <!-- Content for Tab 3 (hidden by default) -->
+                <div id="tab-content-3" class="tab-content hidden">
+                    <h4 class="text-xl font-bold text-pink-700 mb-2 hero-text">My Favorite Smile</h4>
+                    <p class="text-gray-600">This picture says it all. Your smile lights up my world, and I feel so lucky that I get to be the reason behind it sometimes. Seeing you happy is the best feeling in the world.</p>
                 </div>
 
-                <!-- Photo Card 2 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
-                <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- You'll need to get the raw link for your other images too! -->
-                    <img src="annnn.jpg" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
-                         alt="Memory 2 - Adventure Time" class="w-full h-40 md:h-64 object-cover">
-                    <p class="p-3 text-sm font-medium text-center text-red-700">Adventure Time</p>
-                </div>
-
-                <!-- Photo Card 3 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
-                <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- Replace the placeholder URL below with the direct URL to your image -->
-                    <img src="images.jpg" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
-                         alt="Memory 3 - My Favorite Smile" class="w-full h-40 md:h-64 object-cover">
-                    <p class="p-3 text-sm font-medium text-center text-pink-700">My Favorite Smile</p>
-                </div>
-
-                <!-- Photo Card 4 - ⚠️ PASTE YOUR IMAGE URL HERE ⚠️ -->
-                <div class="bg-pink-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                    <!-- Replace the placeholder URL below with the direct URL to your image -->
-                    <img src="imgae.jpeg" 
-                         onerror="this.onerror=null;this.src='https://placehold.co/400x600/fecaca/dc2626?text=Image+Not+Found';"
-                         alt="Memory 4 - To Many More Years" class="w-full h-40 md:h-64 object-cover">
-                    <p class="p-3 text-sm font-medium text-center text-red-700">To Many More Years</p>
+                <!-- Content for Tab 4 (hidden by default) -->
+                <div id="tab-content-4" class="tab-content hidden">
+                    <h4 class="text-xl font-bold text-red-700 mb-2 hero-text">To Many More Years</h4>
+                    <p class="text-gray-600">From our first day to today, it's been an incredible journey. I can't wait to see what the future holds for us. Here's to a lifetime of more memories, more laughs, and more love. Happy Anniversary!</p>
                 </div>
             </div>
         </section>
@@ -150,7 +178,7 @@
                 With all my love,
             </p>
             <p class="text-2xl hero-text font-semibold text-pink-600 mt-2">
-                [Lilli]
+                [Your Name Here]
             </p>
         </div>
 
@@ -285,13 +313,31 @@
                  revealContent();
             }
         });
+
+        // --- Tab Logic ---
+        const imageTabs = document.querySelectorAll('.image-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        imageTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabNumber = tab.dataset.tab;
+
+                // Deactivate all tabs and hide all content
+                imageTabs.forEach(t => t.classList.remove('active-tab'));
+                tabContents.forEach(c => c.classList.add('hidden'));
+
+                // Activate the clicked tab
+                tab.classList.add('active-tab');
+                
+                // Show the corresponding content
+                const contentToShow = document.getElementById(`tab-content-${tabNumber}`);
+                if (contentToShow) {
+                    contentToShow.classList.remove('hidden');
+                }
+            });
+        });
     
     </script>
 </body>
 </html>
-
-
-
-
-
 
