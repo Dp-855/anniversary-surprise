@@ -19,12 +19,11 @@
 
     .countdown-segment {
       transition: all 0.3s ease-in-out;
-      transform: scale(1);
     }
 
     .countdown-segment:hover {
       transform: scale(1.05);
-      box-shadow: 0 10px 15px -3px rgba(224, 36, 91, 0.5), 0 4px 6px -2px rgba(224, 36, 91, 0.05);
+      box-shadow: 0 10px 15px -3px rgba(224, 36, 91, 0.5);
     }
 
     #main-content {
@@ -37,14 +36,14 @@
       text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
 
+    #reveal-button {
+      animation: pulse-reveal 2s infinite;
+    }
+
     @keyframes pulse-reveal {
       0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 36, 91, 0.7); }
       70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(224, 36, 91, 0); }
       100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 36, 91, 0); }
-    }
-
-    #reveal-button {
-      animation: pulse-reveal 2s infinite;
     }
 
     .image-tab {
@@ -65,6 +64,15 @@
 
     .animate-fade-in {
       animation: fade-in 0.3s ease-out;
+    }
+
+    #popup-img {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #popup-img[src] {
+      opacity: 1;
     }
   </style>
 </head>
@@ -114,17 +122,32 @@
       </h3>
 
       <div class="flex justify-center items-center gap-2 md:gap-4 p-2 bg-pink-50 rounded-full shadow-inner">
-        <div class="image-tab cursor-pointer rounded-full p-1 active-tab" data-img="an.jpg" data-title="The Beginning" data-text="The day we first entwined in each other when two souls bonded as if they are meant to be forever.">
-          <img src="First.jpg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fecaca/dc2626?text=1';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+        <div class="image-tab cursor-pointer rounded-full p-1 active-tab" 
+             data-img="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/First.jpg" 
+             data-title="The Beginning" 
+             data-text="This was the day our adventure started. I remember feeling so excited and a little nervous, but seeing your smile made everything perfect.">
+          <img src="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/First.jpg" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
         </div>
-        <div class="image-tab cursor-pointer rounded-full p-1" data-img="annnn.jpg" data-title="Adventure Time" data-text="The calm in my storm..you bring peace to me. With us together even eternity seems a very less time.">
-          <img src="Second.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f87171/dc2626?text=2';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+
+        <div class="image-tab cursor-pointer rounded-full p-1" 
+             data-img="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Second.jpeg" 
+             data-title="Adventure Time" 
+             data-text="Remember that spontaneous trip we took? We got a little lost, but we laughed the entire time. It's one of my favorite memories.">
+          <img src="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Second.jpeg" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
         </div>
-        <div class="image-tab cursor-pointer rounded-full p-1" data-img="images.jpg" data-title="My Favorite Smile" data-text="Dont know when we'll have a perfect couple photo..but still with all our imperfections, we're best for one another.">
-          <img src="Third.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/fb923c/dc2626?text=3';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+
+        <div class="image-tab cursor-pointer rounded-full p-1" 
+             data-img="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Third.jpeg" 
+             data-title="My Favorite Smile" 
+             data-text="Your smile lights up my world. Seeing you happy is the best feeling ever.">
+          <img src="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Third.jpeg" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
         </div>
-        <div class="image-tab cursor-pointer rounded-full p-1" data-img="imgae.jpeg" data-title="To Many More Years" data-text="The best day of my life.. The best moment of my life.. The best part of having you was to have u in this moment.">
-          <img src="Fourth.jpeg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/f472b6/dc2626?text=4';" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
+
+        <div class="image-tab cursor-pointer rounded-full p-1" 
+             data-img="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Fourth.jpeg" 
+             data-title="To Many More Years" 
+             data-text="From our first day to today, it's been an incredible journey. Here's to many more memories and laughs.">
+          <img src="https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Fourth.jpeg" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-full">
         </div>
       </div>
     </section>
@@ -132,7 +155,7 @@
     <!-- Signature -->
     <div class="text-center mt-12 pt-6 border-t border-gray-100">
       <p class="text-xl italic text-gray-400">With all my love,</p>
-      <p class="text-2xl hero-text font-semibold text-pink-600 mt-2">[Your Name Here]</p>
+      <p class="text-2xl hero-text font-semibold text-pink-600 mt-2">Dev 💖</p>
     </div>
   </div>
 
@@ -184,7 +207,6 @@
 
     function displayRevealScreen() {
       countdownContainer.style.opacity = '0';
-      countdownContainer.style.height = '0';
       setTimeout(() => {
         countdownContainer.classList.add('hidden');
         coverScreen.classList.remove('hidden');
@@ -234,6 +256,9 @@
         const title = tab.getAttribute('data-title');
         const text = tab.getAttribute('data-text');
         popupImg.src = imgSrc;
+        popupImg.onerror = () => {
+          popupImg.src = 'https://placehold.co/600x400/fecaca/dc2626?text=Image+Not+Found';
+        };
         popupTitle.textContent = title;
         popupText.textContent = text;
         popupOverlay.classList.remove('hidden');
@@ -256,7 +281,3 @@
   </script>
 </body>
 </html>
-
-
-
-
