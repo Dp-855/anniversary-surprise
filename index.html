@@ -176,6 +176,7 @@
     const revealButton = document.getElementById('reveal-button');
     const mainContent = document.getElementById('main-content');
     let countdownInterval;
+    let bgMusic; // 🎵 Declare globally so it doesn’t restart each time
 
     function createSegment(value, unit) {
       return `
@@ -213,6 +214,13 @@
       }, 1000);
     }
 
+    function playMusic() {
+      bgMusic = new Audio("https://raw.githubusercontent.com/Dp-855/anniversary-surprise/main/Ek din.mp4"); // 🎵 Replace with your GitHub music link
+      bgMusic.loop = true;
+      bgMusic.volume = 0.7;
+      bgMusic.play();
+    }
+
     function revealContent() {
       coverScreen.style.opacity = '0';
       setTimeout(() => {
@@ -220,6 +228,7 @@
         mainContent.style.opacity = '1';
         mainContent.style.transform = 'scale(1)';
         launchConfetti();
+        playMusic(); // 🎵 Music starts when revealed
       }, 500);
     }
 
@@ -263,7 +272,7 @@
         popupText.textContent = text;
         popupOverlay.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        launchConfetti(); // 🎉 Confetti when popup opens
+        launchConfetti();
       });
     });
 
@@ -281,8 +290,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
